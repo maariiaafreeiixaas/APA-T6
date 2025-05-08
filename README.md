@@ -1,6 +1,6 @@
 # Expresiones Regulares
 
-## Nom i cognoms
+## Nom i cognoms: MARIA FREIXAS SOLÉ
 
 ## Tratamiento de ficheros de notas
 
