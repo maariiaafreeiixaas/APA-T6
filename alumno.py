@@ -51,7 +51,7 @@ def leeAlumnos(ficAlumnos):
 
     >>> alumnos = leeAlumnos('alumnos.txt')
     >>> for a in alumnos:
-    ...     print(alumnos[nom])
+    ...     print(alumnos[a])
     ...
     171     Blanca Agirrebarrenetse 9.5
     23      Carles Balcells de Lara 4.9
