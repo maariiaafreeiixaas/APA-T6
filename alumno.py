@@ -46,33 +46,34 @@ class Alumno:
 import re
 
 def leeAlumnos(ficAlumnos):
-        """
-        >>> alumnos = leeAlumnos("alumnos.txt")
-        >>> for nom in alumnos:
-            print(alumnos[nom])
+    """
+    Lee un fichero y devuelve un diccionario {nombre: Alumno}
 
-            171     Blanca Agirrebarrenetse 10
-            23      Carles Balcells de Lara 5
-            68  David Garcia Fuster 	7.75
-        """
-          
-        dicc = {}
+    >>> alumnos = leeAlumnos('alumnos.txt')
+    >>> for a in alumnos:
+    ...     print(alumnos[a])
+    ...
+    171     Blanca Agirrebarrenetse 9.5
+    23      Carles Balcells de Lara 4.9
+    68      David Garcia Fuster     7.0
+    """
+    dicc = {}
 
-        exp_id = r'\s*(?P<id>\d+)\s+'
-        exp_nom = r'(?P<nom>[\w\s]+?)\s+'
-        exp_notes = r'(?P<notes>[\d.\s]+)\s+'
-        #expresion = re.compile(r'\s*(?P<id>\d+)\s+(?P<nom>[\w\s]+?)\s+(?P<notes>[\d.\s]+)\s*') #r:regular. s:space. d:1 digito o mas. *:cero o mas veces. +:una o mas veces. w:
-        expresion = re.compile(exp_id+exp_nom+exp_notes)
-        #abrir archivo con gestor de contexto
-        with open(ficAlumnos,'rt') as fpAlumnos: #'rt' es el modo: read texto
-            for linea in fpAlumnos:
-                match = expresion.search(linea)
-                if match is not None:
-                    print(match['id'])
-                    print(match['nom'])
-                    print(match['notes'])
-                    dicc[exp_nom] = Alumno(exp_nom, exp_id, exp_notes)
-        return dicc
+    exp_id = r'\s*(?P<id>\d+)\s+'
+    exp_nom = r'(?P<nom>[\w\s]+?)\s+'
+    exp_notes = r'(?P<notes>[\d.\s]+)\s*'
+    expresion = re.compile(exp_id + exp_nom + exp_notes)
+
+    with open(ficAlumnos, 'rt', encoding='utf-8') as fp:
+        for linea in fp:
+            match = expresion.search(linea)
+            if match:
+                iden = int(match['id'])
+                nombre = ' '.join(match['nom'].split())
+                notas = [float(n) for n in match['notes'].split()]
+                dicc[nombre] = Alumno(nombre, iden, notas)
+
+    return dicc
 
 if __name__ == "__main__":
     import doctest
