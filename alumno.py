@@ -73,3 +73,7 @@ def leeAlumnos(ficAlumnos):
                     print(match['notes'])
                     dicc[exp_nom] = Alumno(exp_nom, exp_id, exp_notes)
         return dicc
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
