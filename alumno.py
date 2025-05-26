@@ -77,4 +77,4 @@ def leeAlumnos(ficAlumnos):
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod(verbose=True)
+    doctest.testmod(verbose=True, optionflags=doctest.NORMALIZE_WHITESPACE)
