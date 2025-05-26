@@ -46,6 +46,16 @@ class Alumno:
 import re
 
 def leeAlumnos(ficAlumnos):
+        """
+        >>> alumnos = leeAlumnos("alumnos.txt")
+        >>> for nom in alumnos:
+            print(alumnos[nom])
+
+            171     Blanca Agirrebarrenetse 10
+            23      Carles Balcells de Lara 5
+            68  David Garcia Fuster 	7.75
+        """
+          
         dicc = {}
 
         exp_id = r'\s*(?P<id>\d+)\s+'

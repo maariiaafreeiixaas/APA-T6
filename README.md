@@ -267,8 +267,9 @@ def leeAlumnos(ficAlumnos):
                     print(match['notes'])
                     dicc[exp_nom] = Alumno(exp_nom, exp_id, exp_notes)
         return dicc
+```
 
-
+```python
 import re
 
 def normalizaHoras(ficText, ficNorm):
