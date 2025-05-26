@@ -46,6 +46,8 @@ class Alumno:
 import re
 
 def leeAlumnos(ficAlumnos):
+        dicc = {}
+
         exp_id = r'\s*(?P<id>\d+)\s+'
         exp_nom = r'(?P<nom>[\w\s]+?)\s+'
         exp_notes = r'(?P<notes>[\d.\s]+)\s+'
@@ -59,4 +61,5 @@ def leeAlumnos(ficAlumnos):
                     print(match['id'])
                     print(match['nom'])
                     print(match['notes'])
-
+                    dicc[exp_nom] = Alumno(exp_nom, exp_id, exp_notes)
+        return dicc

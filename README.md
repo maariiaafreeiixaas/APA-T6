@@ -246,6 +246,57 @@ Inserte a continuación los códigos fuente desarrollados en esta tarea, usando 
 comandos necesarios para que se realice el realce sintáctico en Python del mismo (no
 vale insertar una imagen o una captura de pantalla, debe hacerse en formato *markdown*).
 
+```python
+import re
+
+def leeAlumnos(ficAlumnos):
+        dicc = {}
+
+        exp_id = r'\s*(?P<id>\d+)\s+'
+        exp_nom = r'(?P<nom>[\w\s]+?)\s+'
+        exp_notes = r'(?P<notes>[\d.\s]+)\s+'
+        #expresion = re.compile(r'\s*(?P<id>\d+)\s+(?P<nom>[\w\s]+?)\s+(?P<notes>[\d.\s]+)\s*') #r:regular. s:space. d:1 digito o mas. *:cero o mas veces. +:una o mas veces. w:
+        expresion = re.compile(exp_id+exp_nom+exp_notes)
+        #abrir archivo con gestor de contexto
+        with open(ficAlumnos,'rt') as fpAlumnos: #'rt' es el modo: read texto
+            for linea in fpAlumnos:
+                match = expresion.search(linea)
+                if match is not None:
+                    print(match['id'])
+                    print(match['nom'])
+                    print(match['notes'])
+                    dicc[exp_nom] = Alumno(exp_nom, exp_id, exp_notes)
+        return dicc
+
+
+import re
+
+def normalizaHoras(ficText, ficNorm):
+    # Expresiones horarias correctas comunes
+    patrones = [
+        #18h45m
+        (re.compile(r'\b(\d{1,2})h(\d{1,2})m\b'), 
+         lambda h, m: f"{int(h):02d}:{int(m):02d}" if int(h) < 24 and int(m) < 60 else f"{h}h{m}m"),
+        
+        #7h
+        (re.compile(r'\b(\d{1,2})h\b'), 
+         lambda h: f"{int(h):02d}:00" if int(h) < 24 else f"{h}h"),
+        
+        #8:05
+        (re.compile(r'\b(\d{1,2}):(\d{2})\b'), 
+         lambda h, m: f"{int(h):02d}:{int(m):02d}" if int(h) < 24 and int(m) < 60 else f"{h}:{m}"),
+    ]
+
+    with open(ficText, encoding="utf-8") as fin, open(ficNorm, "w", encoding="utf-8") as fout:
+        for linea in fin:
+            nueva = linea
+            for patron, reemplazo in patrones:
+                nueva = patron.sub(lambda m: reemplazo(*m.groups()), nueva)
+            fout.write(nueva)
+
+```
+
+
 ##### Subida del resultado al repositorio GitHub y *pull-request*
 
 La entrega se formalizará mediante *pull request* al repositorio de la tarea.
