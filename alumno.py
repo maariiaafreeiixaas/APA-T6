@@ -51,7 +51,7 @@ def leeAlumnos(ficAlumnos):
 
     >>> alumnos = leeAlumnos('alumnos.txt')
     >>> for a in alumnos:
-    ...     print(alumnos[a])
+    ...     print(alumnos[nom])
     ...
     171     Blanca Agirrebarrenetse 9.5
     23      Carles Balcells de Lara 4.9
@@ -68,10 +68,10 @@ def leeAlumnos(ficAlumnos):
         for linea in fp:
             match = expresion.search(linea)
             if match:
-                iden = int(match['id'])
-                nombre = ' '.join(match['nom'].split())
-                notas = [float(n) for n in match['notes'].split()]
-                dicc[nombre] = Alumno(nombre, iden, notas)
+                id = int(match['id'])
+                nom = ' '.join(match['nom'].split())
+                notes = [float(n) for n in match['notes'].split()]
+                dicc[nom] = Alumno(nom, id, notes)
 
     return dicc
 
